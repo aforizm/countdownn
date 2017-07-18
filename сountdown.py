@@ -14,7 +14,7 @@ class Application(Frame):
 	def AddWidgets(self):
 		#надпись
 		Label(self,
-			  text = "Прошло дней",
+			  text = "Прошло дней: ",
 			  font=("Bookman Old Style", 12)
 			  ).grid(row = 0, column = 0, columnspan = 1, sticky = W)
 
