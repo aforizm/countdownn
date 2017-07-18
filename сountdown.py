@@ -27,13 +27,34 @@ class Application(Frame):
 			  )
 		self.lbl.grid(row = 0, column = 2, columnspan = 1, sticky = W)
 
-		f = open('date.dat', 'rb')
-		prev_date = pickle.load(f)		
-		today = Delorean()
+		try:
+			f = open('date.dat', 'rb')
+			prev_date = pickle.load(f)		
+			today = Delorean()
+		except FileNotFoundError:
+			today = Delorean()		
+			f = open('date.dat', 'wb')
+			pickle.dump(today, f)
+			prev_date = Delorean()		
 		
 		countdown = today - prev_date
 		self.count_lbl.set(countdown.days)
 		f.close()
+
+		#Last reset
+		Label(self,
+			  text = "Last Reset Date: ",
+			  font=("Bookman Old Style", 12)
+			  ).grid(row = 1, column = 0, columnspan = 2, sticky = W)
+
+		#last date
+		self.last_date_str = StringVar()
+		self.last_date_str.set(prev_date.date)
+		self.last_date = Label(self,
+			  textvariable = self.last_date_str,
+			  font=("Bookman Old Style", 12)
+			  ).grid(row = 1, column = 2, columnspan = 2, sticky = W)
+
 		
 		#кнопка обнулить
 		Button(self,
@@ -47,6 +68,12 @@ class Application(Frame):
 		f = open('date.dat', 'wb')
 		pickle.dump(today, f)
 		f.close
+		self.change_count()
+
+	def change_count(self):
+		countdown = 0
+		self.count_lbl.set(countdown)
+		pass
 		
 
 def main():
