@@ -68,11 +68,13 @@ class Application(Frame):
 		f = open('date.dat', 'wb')
 		pickle.dump(today, f)
 		f.close
-		self.change_count()
+		self.change_count(today.date)
 
-	def change_count(self):
+	def change_count(self, today):
+		date = today
 		countdown = 0
 		self.count_lbl.set(countdown)
+		self.last_date_str.set(date)
 		pass
 		
 
