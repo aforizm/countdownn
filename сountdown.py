@@ -76,6 +76,11 @@ class Application(Frame):
 		self.count_lbl.set(countdown)
 		self.last_date_str.set(date)
 		pass
+	
+	def ListDaysViewer(self):
+		root2 = Tk()
+		Label(root2, text = self.countdown).pack()
+		root2.mainloop()
 		
 
 def main():
